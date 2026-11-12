@@ -1,0 +1,55 @@
+{
+  "name": "chinastay-travel-mcp",
+  "version": "1.0.0",
+  "description": "Official Model Context Protocol (MCP) server for ChinaStay — authoritative 2026 China visa/240h TWOV rules, app Wi-Fi vs eSIM compatibility, viral coordinates with Chinese taxi flashcards, and bilingual city fixer directories.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "chinastay-travel-mcp": "dist/index.js",
+    "china-travel-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "sync-data": "node scripts/sync-data.mjs",
+    "build": "node scripts/sync-data.mjs && tsc",
+    "dev": "node scripts/sync-data.mjs && tsc --watch",
+    "start": "node dist/index.js",
+    "test": "node scripts/test-mcp.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "china-travel",
+    "china-visa",
+    "240-hour-twov",
+    "china-apps",
+    "chinastay",
+    "travel-assistant"
+  ],
+  "author": "China Stay <hello@chinastay.org>",
+  "license": "MIT",
+  "homepage": "https://chinastay.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MileyFu/china-travel-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MileyFu/china-travel-mcp/issues"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.3"
+  }
+}
