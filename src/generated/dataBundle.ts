@@ -3,7 +3,7 @@
 import type { DataBundle } from '../types.js';
 
 export const DATA_BUNDLE: DataBundle = {
-  "generatedAt": "2026-11-12",
+  "generatedAt": "2026-11-25",
   "countries": [
     {
       "code": "FR",
@@ -390,18 +390,6 @@ export const DATA_BUNDLE: DataBundle = {
       "policyValidity": "Valid through December 31, 2026"
     },
     {
-      "code": "CZ",
-      "name": "Czech Republic",
-      "region": "Europe",
-      "category": "unilateral",
-      "twov240": true,
-      "twov57": true,
-      "twov55": true,
-      "unilateralVisaFree": true,
-      "visaFreeDays": 30,
-      "policyValidity": "Valid through December 31, 2026"
-    },
-    {
       "code": "SE",
       "name": "Sweden",
       "region": "Europe",
@@ -778,6 +766,16 @@ export const DATA_BUNDLE: DataBundle = {
     {
       "code": "LT",
       "name": "Lithuania",
+      "region": "Europe",
+      "category": "twov_only",
+      "twov240": true,
+      "twov57": true,
+      "twov55": true,
+      "unilateralVisaFree": false
+    },
+    {
+      "code": "CZ",
+      "name": "Czech Republic",
       "region": "Europe",
       "category": "twov_only",
       "twov240": true,
@@ -2913,31 +2911,37 @@ export const DATA_BUNDLE: DataBundle = {
       }
     },
     {
-      "slug": "czech-republic-citizens-30-day-china-visa-free",
+      "slug": "czech-republic-citizens-240-hour-china-transit",
       "code": "CZ",
       "name": "Czech Republic",
       "demonym": "Czech Citizens",
       "flag": "🇨🇿",
       "region": "Europe",
-      "category": "unilateral",
-      "policyTitle": "30-Day Direct Visa-Free Exemption (Unilateral Trial)",
-      "maxStayDays": 30,
-      "maxStayHours": 720,
-      "directRoundTripAllowed": true,
-      "thirdCountryRequired": false,
-      "policyValidity": "Valid through December 31, 2026",
-      "executiveSummary": "Czech Citizens holding ordinary passports enjoy direct visa exemption for visits up to 30 days (valid through december 31, 2026). You can fly direct round-trip flights between Czech Republic and China for tourism, business meetings, cultural visits, or transit with zero embassy visa applications, appointment fees, or paperwork.",
-      "allowedStayArea": "Full nationwide mobility across all 31 provinces, autonomous regions, and municipalities of Mainland China.",
+      "category": "twov_only",
+      "policyTitle": "240-Hour (10-Day) Transit Without Visa (TWOV)",
+      "maxStayDays": 10,
+      "maxStayHours": 240,
+      "directRoundTripAllowed": false,
+      "thirdCountryRequired": true,
+      "policyValidity": "Official National Immigration Administration (NIA) Policy (Active 2026)",
+      "executiveSummary": "While Czech Republic passport holders do not qualify for China's unilateral direct visa exemption, they are fully eligible for the unified 240-Hour (10-Day) Transit Without Visa (TWOV) scheme. Under National Immigration Administration regulations, you can enter mainland China through 65 designated open ports across 24 provinces without applying for an embassy visa, provided your itinerary continues to a third country or region.",
+      "allowedStayArea": "Permitted movement across authorized zones in 24 provinces and municipalities (including Beijing, Shanghai, Guangdong, Jiangsu, Zhejiang, Sichuan, Shaanxi, and Chongqing). Free cross-province travel is legally permitted.",
       "sampleRoutes": [
         {
-          "route": "Prague (PRG) → Shanghai (PVG) → Prague",
-          "description": "Direct round trip 100% permitted! No third country needed under the 30-day visa exemption.",
+          "route": "Prague (PRG) → Beijing (PEK) → Tokyo (NRT) → Prague",
+          "description": "Valid transit itinerary: Country A (Czech Republic) → China (PEK) → Country C (Japan). Fully compliant with 240-hour TWOV rules.",
           "status": "valid"
         },
         {
-          "route": "Prague → Beijing (PEK) → Tokyo (HND)",
-          "description": "Also fully valid for onward international journeys and multi-country travels.",
+          "route": "Prague → Shanghai (PVG) → Hong Kong (HKG) → Prague",
+          "description": "Valid transit itinerary. Hong Kong SAR is legally classified as a separate customs territory for immigration purposes.",
           "status": "valid"
+        },
+        {
+          "route": "Prague → Beijing (PEK) → Prague",
+          "description": "ILLEGAL / REJECTED. Direct round-trip travel without an onward third destination is classified as destination travel, not transit. Airlines will deny boarding at Prague Václav Havel Airport without a valid consular visa.",
+          "status": "invalid",
+          "rejectionReason": "Country of departure (Czech Republic) is identical to country of arrival (Czech Republic)."
         }
       ],
       "eSIMAdvice": "Avoid expensive international roaming rates from domestic carriers. Install an international travel eSIM (such as Airalo or Nomad) prior to departure; cellular data routes through international gateways, providing immediate uncensored access to Google, WhatsApp, Slack, and banking portals upon landing in China.",

@@ -1,6 +1,6 @@
 {
   "name": "chinastay-travel-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official Model Context Protocol (MCP) server for ChinaStay — authoritative 2026 China visa/240h TWOV rules, app Wi-Fi vs eSIM compatibility, viral coordinates with Chinese taxi flashcards, and bilingual city fixer directories.",
   "type": "module",
   "main": "dist/index.js",

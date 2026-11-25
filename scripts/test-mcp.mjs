@@ -112,7 +112,44 @@ async function runTests() {
     assert.equal(frDirectJson.verdict.maxDays, 30);
     console.log('✓ check_china_visa_transit: France = DIRECT_VISA_FREE (30 days)');
 
-    // 4d. Visa Tool: Unknown passport returns isError: true
+    // 4d. Visa Tool: Czech Republic TWOV-only verification (No 30-day direct visa exemption)
+    const czRoundTrip = await client.callTool({
+      name: 'check_china_visa_transit',
+      arguments: {
+        passport_country: 'Czech Republic',
+        origin_country: 'Czech Republic',
+        entry_port: 'PVG',
+        onward_country: 'Czech Republic',
+      },
+    });
+    const czRoundTripJson = parseTextJson(czRoundTrip);
+    assert.equal(czRoundTripJson.verdict.status, 'INELIGIBLE_SAME_COUNTRY');
+    assert.equal(
+      czRoundTripJson.officialDeepLinks.countryGuide,
+      'https://chinastay.org/visa-free/czech-republic-citizens-240-hour-china-transit/'
+    );
+    console.log('✓ check_china_visa_transit: Czech Republic round-trip correctly rejected (INELIGIBLE_SAME_COUNTRY)');
+
+    const czValidTransit = await client.callTool({
+      name: 'check_china_visa_transit',
+      arguments: {
+        passport_country: 'Czechia',
+        origin_country: 'Czech Republic',
+        entry_port: 'Beijing',
+        onward_country: 'Hong Kong',
+        planned_stay_hours: 120,
+      },
+    });
+    const czValidTransitJson = parseTextJson(czValidTransit);
+    assert.equal(czValidTransitJson.verdict.status, 'ELIGIBLE_TWOV');
+    assert.equal(czValidTransitJson.verdict.maxHours, 240);
+    assert.equal(
+      czValidTransitJson.officialDeepLinks.countryGuide,
+      'https://chinastay.org/visa-free/czech-republic-citizens-240-hour-china-transit/'
+    );
+    console.log('✓ check_china_visa_transit: Czechia -> Beijing -> Hong Kong = ELIGIBLE_TWOV (240h)');
+
+    // 4e. Visa Tool: Unknown passport returns isError: true
     const badVisa = await client.callTool({
       name: 'check_china_visa_transit',
       arguments: { passport_country: 'Atlantis' },
